@@ -21,7 +21,7 @@ public class BookStore {
 	
 	// Instance Variables ---------------------------------------------
 	
-	private int invalidChoiceAttempts = 0; // Current user invalid choice input attempts	
+	private int invalid_choice_attempts = 0; // Current user invalid choice input attempts	
 	private final int MAX_INVALID_ATTEMPTS = 5;// Maximum user invalid input attempts, When passed the user exit the program
 
 	private Scanner input_scanner;
@@ -51,7 +51,7 @@ public class BookStore {
 
 		
 		// Exit the program after MAX_INVALID_ATTEMPTS has been passed
-		if (invalidChoiceAttempts >= MAX_INVALID_ATTEMPTS) {
+		if (invalid_choice_attempts >= MAX_INVALID_ATTEMPTS) {
 			this.close();
 		}
 
@@ -71,9 +71,9 @@ public class BookStore {
 			// Check if the input is between the range of the menu options
 			if (inputInt < 1 || inputInt > 5) {
 				
-				invalidChoiceAttempts++;
+				invalid_choice_attempts++;
 				System.out.println("Invalid input. Please enter a number between 1 and 5, Attempts left: "
-						+ (MAX_INVALID_ATTEMPTS - invalidChoiceAttempts));
+						+ (MAX_INVALID_ATTEMPTS - invalid_choice_attempts));
 				
 				// Re ask the user to enter a choice
 				return readValidMenuInt(prompt);
@@ -81,20 +81,24 @@ public class BookStore {
 				
 				// Ensure that the scanner instance state is re seted
 				input_scanner = new Scanner(System.in);
+				
+				// Reset the invalid_choice_attempts to its initial value
+				invalid_choice_attempts = 0;
 				// Return the valid input response of the user
 				return inputInt;
 			}
 		}
 
-		// Thrown when the input is not an integer
+		// Thrown when the input wass not an integer
 		catch (InputMismatchException e) {
 			
-			invalidChoiceAttempts++;
+			invalid_choice_attempts++;
 			System.out.println("Invalid input. Please enter an Integer, Attempts left: "
-					+ (MAX_INVALID_ATTEMPTS - invalidChoiceAttempts));
+					+ (MAX_INVALID_ATTEMPTS - invalid_choice_attempts));
 			
 			// Instantiate a new scanner instance to 
 			// ensure that the next input is only typed by the user
+			// This can be ignored but it is safer
 			input_scanner = new Scanner(System.in);
 			
 			// Re ask the user to enter a choice
@@ -166,20 +170,7 @@ public class BookStore {
 
 		return enteredResponse;
 	}
-	public boolean bookWithSameTitleExists(Book book) {
-		// Check if a book with the same title exists
-		
-		BookType book_type = getBookType(book);
-		for(int i = 0; i < books.length; i++){
-			if(books[i] != null) {
-				BookType current_book_type = getBookType(books[i]);
-				if(book_type.equals(current_book_type) && book.isSameTitleAs(books[i])) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+	
 	public boolean bookAlreadyExists(Book book) {
 		
 		// Check if a book with the same title and author exists IN CASE OF A BOOK
@@ -197,6 +188,9 @@ public class BookStore {
 		return false;
 	}
 	public void updateBookStateInBooks(Book book) {
+		// Find the book equivalent to "book" in the books array
+		// and replace it with it
+		// this update the state of "book" in the books array
 		for(int i =0; i< books.length; i++) {
 			if(books[i] != null) {
 				if(book.equals(books[i])) {
@@ -252,6 +246,7 @@ public class BookStore {
 		displayBookTypeMenu();
 		
 		// As per Assignment we dont validate user input here
+		// we coulve used readMenuInt() if we wanted to validate the input
 		int response = input_scanner.nextInt();
 		
 		// Re put the cursor on a new line
@@ -263,7 +258,7 @@ public class BookStore {
 	// ----------------------------------------------------------------
 	
 	
-	// Events + Utils ----------------------------------------
+	// Events + their Utils ----------------------------------------
 	public void addBookToBooks(Book book) {
 		
 		// Check for empty Spaces in the array to add a book
@@ -283,7 +278,9 @@ public class BookStore {
 		// If this part of the code is reached then the array was full
 		
 		int old_array_size = books.length;
-		Book[] new_books_array = new Book[old_array_size + 10];
+		// Instantiate a new book array with 50% the size of the initial one
+		int new_array_size = old_array_size + (old_array_size / 2);
+		Book[] new_books_array = new Book[new_array_size];
 		
 		// Copy the old array into the new one
 		for(int i=0; i<old_array_size; i++) {
@@ -308,8 +305,11 @@ public class BookStore {
 			book = getBookFromBooks(book);
 			book.incrementNumberOfCopies();
 			updateBookStateInBooks(book);
+			
+			System.out.println("Number of copies of this book was increase !");
 		}else {					
 			addBookToBooks(book);
+			System.out.println("This book was successfully added to the book store!");
 		}
 		printDashedLine();
 	}
@@ -359,6 +359,8 @@ public class BookStore {
 		if(bookAlreadyExists(book)) {
 			
 			deleteBookFromBooks(book);
+			System.out.println("This book was successfully deleted from the book store!");
+			
 		}
 		// If it does not exists display an error message to the user.
 		else {
@@ -401,6 +403,7 @@ public class BookStore {
 		if(bookAlreadyExists(book)) {
 			
 			sellBookFromBooks(book);
+			System.out.println("This book was successfully selled from the book store!");
 		}
 		
 		// If it does not exists display an error message to the user.
@@ -437,7 +440,7 @@ public class BookStore {
 			System.out.println("List of Books in our Store:\n");
 			for(int i = 0; i< books.length; i++) {
 				if(books[i] != null) {				
-					System.out.println(books[i].toString());
+					System.out.println("•\t" + books[i].toString());
 				}
 			}
 			printDashedLine();
