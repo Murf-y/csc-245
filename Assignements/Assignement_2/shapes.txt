@@ -1,0 +1,9 @@
+circle, 0, 1
+square, 2, 3
+circle, 4, afa
+Hi I AM BAD DATA :)
+triangle, 5, -3
+BRRRRRRR , WSUP, OH
+HI, 420, 6.9
+CiRcLe , -101, 2002
+equilateral triangle, -1, -3
