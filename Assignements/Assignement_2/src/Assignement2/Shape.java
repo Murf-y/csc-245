@@ -61,21 +61,21 @@ public abstract class Shape {
 	
 	public void setXCoordinate(float x)
 	{
-		if(x_coordinate < 100 && x_coordinate > -100) {			
+		if(x < 200 && x > -200) {		
 			x_coordinate = x;
 		}
 		else {
-			System.out.println("X coordinates cannot go out of range [-100 - 100]");	
+			System.out.println("X coordinates cannot go out of range [-200 - 200]");	
 		}
 	}
 
 	public void setYCoordinate(float y)
 	{
-		if(y_coordinate < 100 && y_coordinate > -100) {			
+		if(y < 200 && y > -200) {			
 			y_coordinate = y;
 		}
 		else {
-			System.out.println("X coordinates cannot go out of range [-100 - 100]");	
+			System.out.println("Y coordinates cannot go out of range [-200 - 200]");	
 		}
 	}
 

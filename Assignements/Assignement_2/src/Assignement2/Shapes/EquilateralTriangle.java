@@ -39,7 +39,7 @@ public class EquilateralTriangle extends Triangle{
 		//			SideLength: 12
 		// 			Coordinates: (1, 2)
 		//			Color: (125, 255, 255)
-		return String.format("Equilateral-Triangle:\n\tSideLength: %s\n\t%s", sides[0], super.grandParentToString());
+		return String.format("Equilateral %s", super.toString());
 	}
 	public boolean equals(EquilateralTriangle t) {
 		return super.equals(t) && MathHelper.floatAproxEquals(sides[0], t.getSideLengthAtIndex(0));

@@ -69,9 +69,6 @@ public class Triangle extends Shape{
 				&& MathHelper.floatAproxEquals(sides[1], t.getSideLengthAtIndex(1))
 				&& MathHelper.floatAproxEquals(sides[2], t.getSideLengthAtIndex(2));
 	}
-	public String grandParentToString() {
-		return super.toString();
-	}
 
 	public double area()
 	{

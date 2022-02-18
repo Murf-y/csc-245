@@ -10,6 +10,7 @@
  */
 package Assignement2;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import Assignement2.Shapes.*;
@@ -20,7 +21,7 @@ public class Application {
 	// This could have been Vector<Shape>
 	// but for it is like this for assignement specification
 	// Store the shapes in a collection
-	private Vector<Object> shapes;
+	private ArrayList<Shape> shapes;
 	
 	// Input manager handles all the input validation from the user
 	private InputManager input_manager;
@@ -30,7 +31,7 @@ public class Application {
 	
 	public Application() {
 		// Initialize the dependencies 
-		shapes = new Vector<Object>();
+		shapes = new ArrayList<Shape>();
 		input_manager = new InputManager();
 		file_manager = new FileManager();
 	}
@@ -76,12 +77,12 @@ public class Application {
 		// If no shapes exists return false
 		if(shapes.size() == 0) {return false;}
 		
-		for(Object obj: shapes) {
-			if(((Shape)obj).getShapeType() == ((Shape)shape).getShapeType()) {
+		for(Shape s: shapes) {
+			if(s.getShapeType() == shape.getShapeType()) {
 				// if both shapes have the same type, check the coordinates
 				// The equals method approximate the coordinates of the shapes
 				// since the coordinates are floats
-				if(((Shape)obj).equals(shape)) {
+				if(s.equals(shape)) {
 					return true;
 				}
 			}
@@ -102,17 +103,17 @@ public class Application {
 		int response = input_manager.getValidIntInRange("Enter your choice: ", 1, 4);
 		return MovementDirection.getMovementDirection(response);
 	}
-	public Vector<Shape> findShapesWithCoords(float a, float b){
+	public ArrayList<Shape> findShapesWithCoords(float a, float b){
 		
 		// Find all shapes in that location and return them
 		
 		// A dummy Shape sub class object to compare with
 		Shape s = new Circle(a,b, 1);
 		
-		Vector<Shape> found_shapes = new Vector<Shape>();
-		for(Object obj: shapes) {
-			if(((Shape)obj).equals(s)) {
-				found_shapes.addElement((Shape)obj);
+		ArrayList<Shape> found_shapes = new ArrayList<Shape>();
+		for(Shape shape: shapes) {
+			if(shape.equals(s)) {
+				found_shapes.add(shape);
 			}
 		}
 		return found_shapes;
@@ -123,8 +124,8 @@ public class Application {
 		// Get the radius of the Circle
 		// and the location, and check it already exits if not, add it
 		float radius = input_manager.getValidPositiveFloat("Enter circle radius: ");
-		float x_coordinate = input_manager.getValidFloatInRange("Enter X coordinate: ",-100,100);
-		float y_coordinate = input_manager.getValidFloatInRange("Enter Y coordinate: ", -100 , 100);
+		float x_coordinate = input_manager.getValidFloatInRange("Enter X coordinate: ",-200,200);
+		float y_coordinate = input_manager.getValidFloatInRange("Enter Y coordinate: ", -200 , 200);
 		
 		Shape shape = new Circle(x_coordinate,y_coordinate,radius);
 		if(shapeAlreadyExists(shape)) {
@@ -132,7 +133,7 @@ public class Application {
 			printDashedLine();
 		}
 		else {
-			shapes.addElement(shape);
+			shapes.add(shape);
 			operationDoneOutput();
 		}
 		
@@ -142,8 +143,8 @@ public class Application {
 		// Get the side of the Square
 		// and the location, and check it already exits if not, add it
 		float side_length = input_manager.getValidPositiveFloat("Enter square side length: ");
-		float x_coordinate = input_manager.getValidFloatInRange("Enter X coordinate: ",-100,100);
-		float y_coordinate = input_manager.getValidFloatInRange("Enter Y coordinate: ", -100 , 100);
+		float x_coordinate = input_manager.getValidFloatInRange("Enter X coordinate: ",-200,200);
+		float y_coordinate = input_manager.getValidFloatInRange("Enter Y coordinate: ", -200 , 200);
 		
 		Shape shape = new Square(x_coordinate,y_coordinate,side_length);
 		if(shapeAlreadyExists(shape)) {
@@ -151,7 +152,7 @@ public class Application {
 			printDashedLine();
 		}
 		else {
-			shapes.addElement(shape);
+			shapes.add(shape);
 			operationDoneOutput();
 		}
 	}
@@ -163,8 +164,8 @@ public class Application {
 		float side_length_2 = input_manager.getValidPositiveFloat("Enter Triangle second side length: ");
 		float side_length_3 = input_manager.getValidPositiveFloat("Enter Triangle third side length: ");
 
-		float x_coordinate = input_manager.getValidFloatInRange("Enter X coordinate: ",-100,100);
-		float y_coordinate = input_manager.getValidFloatInRange("Enter Y coordinate: ", -100 , 100);
+		float x_coordinate = input_manager.getValidFloatInRange("Enter X coordinate: ",-200,200);
+		float y_coordinate = input_manager.getValidFloatInRange("Enter Y coordinate: ", -200 , 200);
 		
 		Shape shape;
 		// If all sides are equal
@@ -183,7 +184,7 @@ public class Application {
 			printDashedLine();
 		}
 		else {
-			shapes.addElement(shape);
+			shapes.add(shape);
 			operationDoneOutput();
 		}
 	}
@@ -223,11 +224,11 @@ public class Application {
 	public void handleDeleteEvent() {		
 		
 		// Get the shape location from the user
-		float x_coordinate = input_manager.getValidFloatInRange("Enter X coordinate: ",-100,100);
-		float y_coordinate = input_manager.getValidFloatInRange("Enter Y coordinate: ", -100 , 100);
+		float x_coordinate = input_manager.getValidFloatInRange("Enter X coordinate: ",-200,200);
+		float y_coordinate = input_manager.getValidFloatInRange("Enter Y coordinate: ", -200 , 200);
 		
 		// Get all shapes in that location
-		Vector<Shape> found_shapes = findShapesWithCoords(x_coordinate,y_coordinate);
+		ArrayList<Shape> found_shapes = findShapesWithCoords(x_coordinate,y_coordinate);
 		
 		// If no shapes are found in that location displays a message
 		if(found_shapes.size() == 0) {
@@ -245,11 +246,11 @@ public class Application {
 	public void handleComputeEvent() {
 		
 		// Get the shape location from the user
-		float x_coordinate = input_manager.getValidFloatInRange("Enter X coordinate: ",-100,100);
-		float y_coordinate = input_manager.getValidFloatInRange("Enter Y coordinate: ", -100 , 100);
+		float x_coordinate = input_manager.getValidFloatInRange("Enter X coordinate: ",-200,200);
+		float y_coordinate = input_manager.getValidFloatInRange("Enter Y coordinate: ", -200 , 200);
 		
 		// Get all shapes found in the same location
-		Vector<Shape> found_shapes = findShapesWithCoords(x_coordinate,y_coordinate);
+		ArrayList<Shape> found_shapes = findShapesWithCoords(x_coordinate,y_coordinate);
 		
 		// Check if there is no shapes in that location, displays a message if so.
 		if(found_shapes.size() == 0) {
@@ -282,8 +283,8 @@ public class Application {
 		}
 		
 		printDashedLine();
-		for(Object obj : shapes) {
-			System.out.println(obj.toString()+"\n");
+		for(Shape s : shapes) {
+			System.out.println(s.toString()+"\n");
 			
 		}
 		printDashedLine();
@@ -306,11 +307,11 @@ public class Application {
 		ShapeType type = ShapeType.getShapeFromChar(response);
 		
 		// Get the shape location
-		float x_coordinate = input_manager.getValidFloatInRange("Enter X coordinate: ",-100,100);
-		float y_coordinate = input_manager.getValidFloatInRange("Enter Y coordinate: ", -100 , 100);
+		float x_coordinate = input_manager.getValidFloatInRange("Enter X coordinate: ",-200,200);
+		float y_coordinate = input_manager.getValidFloatInRange("Enter Y coordinate: ", -200 , 200);
 		
 		// Check all shapes with the same location
-		Vector<Shape> found_shapes = findShapesWithCoords(x_coordinate,y_coordinate);
+		ArrayList<Shape> found_shapes = findShapesWithCoords(x_coordinate,y_coordinate);
 		
 		// This is used when the specific shape is found
 		Shape shape = null;
@@ -344,26 +345,26 @@ public class Application {
 		
 		// Map each movement direction with its specific effect on the coordinates
 		for(int i=0; i< shapes.size(); i++) {
-			if(((Shape)shapes.get(i)).equals(shape)) {
+			if((shapes.get(i)).equals(shape) && shapes.get(i).getShapeType() == shape.getShapeType()) {
 				switch(mvt) {
 					case UP:{
 						shape.setYCoordinate(shape.getYCoordinate() + movement_distance);
-						shapes.setElementAt(shape, i);
+						shapes.set(i, shape);
 						break;
 					}
 					case DOWN:{
 						shape.setYCoordinate(shape.getYCoordinate() - movement_distance);
-						shapes.setElementAt(shape, i);
+						shapes.set(i,shape);
 						break;
 					}
 					case RIGHT:{
 						shape.setXCoordinate(shape.getXCoordinate() + movement_distance);
-						shapes.setElementAt(shape, i);
+						shapes.set(i,shape);
 						break;
 					}
 					case LEFT:{
 						shape.setXCoordinate(shape.getXCoordinate() - movement_distance);
-						shapes.setElementAt(shape, i);
+						shapes.set(i,shape);
 						break;
 					}
 				}
@@ -441,8 +442,8 @@ public class Application {
 				float x = Float.parseFloat(parts.get(1));
 				float y = Float.parseFloat(parts.get(2));
 				
-				if((x < -100 || x > 100 )&&(y < -100 || y > 100)) {
-					System.out.println(String.format("Skipped %s , because X and Y coordinates must be in range [-100 - 100]", line));
+				if((x < -200 || x > 200 ) || (y < -200 || y > 200)) {
+					System.out.println(String.format("Skipped %s , because X and Y coordinates must be in range [-200 - 200]", line));
 					continue;
 				}
 				Shape shape = null;
@@ -469,7 +470,7 @@ public class Application {
 				}
 				// Check if the shape already exists
 				if(!shapeAlreadyExists(shape)) {
-					shapes.addElement(shape);
+					shapes.add(shape);
 				}
 				// If so display a message
 				else {
@@ -523,8 +524,7 @@ public class Application {
 		// appending to the end of the file
 		// if we want to overide the file we can simply 
 		// put a writeToFile with an empty string and append = false
-		for(Object obj: shapes) {
-			Shape s = (Shape)obj;
+		for(Shape s: shapes) {
 			String content = String.format("%s,%s,%s\n",s.getShapeType().toString() , s.getXCoordinate(), s.getYCoordinate());
 			
 			file_manager.writeToFile("output.txt", content, true);
