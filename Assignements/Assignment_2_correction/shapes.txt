@@ -1,0 +1,5 @@
+circle, blue, 0, 1, 7
+square, red, 99, 3, 5
+circle, brown, 114, 2, 10
+triangle, yellow, 96, -3, 3, 4, 5
+equilateral triangle, green, -1, -3, 3, 3, 3

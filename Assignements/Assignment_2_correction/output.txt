@@ -1,0 +1,4 @@
+circle, blue, 0, 1, 7
+equilateral triangle, green, -1, -3, 3, 3, 3
+circle, blue, 0, 1, 7
+equilateral triangle, green, -1, -3, 3, 3, 3
