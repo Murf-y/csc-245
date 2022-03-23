@@ -1,0 +1,5 @@
+Horse	Age:	1,	Gender:	female,	Color:	black,	Daily Consumption:	7000
+Chicken	Age:	12,	Gender:	female,	Color:	black,	Daily Consumption:	50
+Cow	Age:	15,	Gender:	male,	Color:	red,	Daily Consumption:	5000
+Lamb	Age:	15,	Gender:	male,	Color:	red,	Daily Consumption:	200
+Lamb	Age:	18,	Gender:	male,	Color:	red,	Daily Consumption:	200
