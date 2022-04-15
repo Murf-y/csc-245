@@ -1,0 +1,6 @@
+Cow	Age: 20 Color: red Gender: male Consumption: 1
+Chicken	Age: 2 Color: white Gender: female Consumption: 1
+Horse	Age: 5 Color: brown Gender: male Consumption: 50
+Cow	Age: 1 Color: black Gender: male Consumption: 200
+Dog	Age: 5 Color: black Gender: male Consumption: 300
+Cow	Age: 8 Color: white Gender: female Consumption: 5000

@@ -1,0 +1,7 @@
+Cow white male 12 2000
+Dog black female 5 200
+Dog black female 5 500
+Dog black female 5 200
+Chicken white female 5 20
+Horse brown male 7 5000
+Dog white male 1 150
