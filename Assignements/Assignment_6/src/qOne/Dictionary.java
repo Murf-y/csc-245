@@ -75,7 +75,7 @@ public class Dictionary {
 			return right.getRightMost();
 		}
 		public int compareTo(BTNode other) {
-			return word.compareTo(other.word);
+			return word.toLowerCase().compareTo(other.getWord().toLowerCase());
 		}
 		
 		public String toString() {
